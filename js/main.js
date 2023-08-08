@@ -55,13 +55,13 @@ function actualizarLista() {
     let opcion;
 
     while (true) {
-        opcion = prompt("Presione R para registrar, C para calcular o S para salir");
+        opcion = prompt("Presione R para registrar, C para calcular o S para salir").toLowerCase();
     
-        if (opcion === "R") {
+        if (opcion === "r") {
             registrarAsistencia();
-        } else if (opcion === "C") {
+        } else if (opcion === "c") {
             calcularPresentesAusentes();
-        } else if (opcion === "S") {
+        } else if (opcion === "s") {
             alert("¡Hasta luego!");
             break; 
         } else {
