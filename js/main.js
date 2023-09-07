@@ -31,7 +31,7 @@ const tablaBody = document.getElementById("tablaBody");
 //tabla
 listado.forEach((empleado) => {
     const fila = document.createElement("tr");
-    //fila.setAttribute("data-index", index); // Agrega el atributo data-index con el valor del índice
+
 //nombre
     const nombreCelda = document.createElement("td");
     nombreCelda.textContent = empleado.nombre;
@@ -100,7 +100,9 @@ listado.forEach((empleado) => {
 const guardarLocalStorageButton = document.getElementById("guardarLocalStorage");
 const informacionGuardadaElement = document.getElementById("informacionGuardada");
 
-// clic boton "Guardar en Local Storage"
+
+
+//  boton "CARGAR"
 cargarButton.addEventListener("click", () => {
     const filas = tablaBody.querySelectorAll("tr");
     const nuevoArray = [];
@@ -111,37 +113,60 @@ cargarButton.addEventListener("click", () => {
         const servicioDropdown = fila.querySelector("select");
         const observacionesInput = fila.querySelector('input[name="observaciones"]');
 
-    const empleadoInfo = {
-        Nombre: fila.querySelector('td:nth-child(1)').textContent,
-        Apellido: fila.querySelector('td:nth-child(2)').textContent,
-        Teléfono: fila.querySelector('td:nth-child(3)').textContent,
-        Base: fila.querySelector('td:nth-child(4)').textContent,
-        Función: fila.querySelector('td:nth-child(5)').textContent,
-        Presentismo: presenteCheckbox.checked ? "Presente" : (ausenteCheckbox.checked ? "Ausente" : ""),
-        Servicio: servicioDropdown.value,
-        Observaciones: observacionesInput.value
-    };
+        const empleadoInfo = {
+            Nombre: fila.querySelector('td:nth-child(1)').textContent,
+            Apellido: fila.querySelector('td:nth-child(2)').textContent,
+            Teléfono: fila.querySelector('td:nth-child(3)').textContent,
+            Base: fila.querySelector('td:nth-child(4)').textContent,
+            Función: fila.querySelector('td:nth-child(5)').textContent,
+            Presentismo: presenteCheckbox.checked ? "Presente" : (ausenteCheckbox.checked ? "Ausente" : ""),
+            Servicio: servicioDropdown.value,
+            Observaciones: observacionesInput.value
+        };
 
         nuevoArray.push(empleadoInfo);
     });
 
+    // Limpia contenid informacionGuardada
+    informacionGuardadaElement.innerHTML = "";
 
+    // Llama a la función actualizarNuevoArray 
+    actualizarNuevoArray(nuevoArray);
 
-    // Mostrar la información en el elemento informacionGuardada
-    const ul = document.createElement("ul");
-    nuevoArray.forEach((info) => {
-        const li = document.createElement("li");
-        li.textContent = `Nombre: ${info.Nombre}, Apellido: ${info.Apellido}, Teléfono: ${info.Teléfono}, Base: ${info.Base}, Función: ${info.Función}, Presentismo: ${info.Presentismo}, Servicio: ${info.Servicio}, Observaciones: ${info.Observaciones}`;
-        ul.appendChild(li);
-    });
-    informacionGuardadaElement.innerHTML = ""; // Limpiar contenido previo
-    informacionGuardadaElement.appendChild(ul);
-
-    // Guardar en el Local Storage usando JSON.stringify
+    // Guardar en el Local Storage
     localStorage.setItem("informacionGuardada", JSON.stringify(nuevoArray));
 });
 
+// Mostrar informacionGuardada EN MI NUEVO ARRAY
+function actualizarNuevoArray(nuevoArray) {
+    const ul = document.createElement("ul");
+    nuevoArray.forEach((info, index) => {
+        const li = document.createElement("li");
+        li.textContent = `Nombre: ${info.Nombre}, Apellido: ${info.Apellido}, Teléfono: ${info.Teléfono}, Base: ${info.Base}, Función: ${info.Función}, Presentismo: ${info.Presentismo}, Servicio: ${info.Servicio}, Observaciones: ${info.Observaciones}`;
 
+        const borrarButton = document.createElement("button");
+        borrarButton.textContent = "Borrar";
+        //índice correspondiente al botón
+        borrarButton.setAttribute("data-index", index);
+        borrarButton.addEventListener('click', (event) => {
+            // índice del botón haciendo atributo data-index
+            const buttonIndex = event.target.getAttribute("data-index");
+            nuevoArray.splice(buttonIndex, 1);
+            // Limpia y vuelve a mostrar informacionGuardada
+            informacionGuardadaElement.innerHTML = "";
+            actualizarNuevoArray(nuevoArray);
+            localStorage.setItem("informacionGuardada", JSON.stringify(nuevoArray));
+        });
+
+        ul.appendChild(li);
+        li.appendChild(borrarButton);
+    });
+
+    // Guardar en el Local Storage
+    localStorage.setItem("informacionGuardada", JSON.stringify(nuevoArray));
+
+    informacionGuardadaElement.appendChild(ul);
+}
 
 
 
@@ -155,7 +180,7 @@ buscarEmpleadoInput.addEventListener("input", () => {
     // Valor del cuadro de búsqueda
     const valorBuscado = buscarEmpleadoInput.value.toLowerCase();
 
-    // Verifica si el valor buscado existe en el array
+    // comprueba si el valor buscado existe en el array
     const empleadoEncontrado = listado.some((empleado) => {
     return (
         empleado.nombre.toLowerCase().includes(valorBuscado) ||
@@ -169,7 +194,7 @@ buscarEmpleadoInput.addEventListener("input", () => {
     // Limpia la tabla
     tablaBody.innerHTML = "";
 
-    // Si se encontró al menos un empleado, realiza el filtrado y muestra los resultados
+    // comprueba si se encuentra el empleado dentro del array
     if (empleadoEncontrado) {
         const empleadosFiltrados = listado.filter((empleado) => {
         return (
