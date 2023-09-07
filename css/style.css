@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: azure;
+}
+
+table {
+  /* Estilos de la tabla, como en el ejemplo anterior */
+    border-spacing: 50px 20px;
+    background-color: rgb(0, 0, 0, 0.2);
+}
+
+
+input[type="checkbox"] {
+    margin-right: 30px; /* Agrega un margen de 10px entre las casillas de verificación */
+  }
+  
+
+.conteiner__buttonsmain {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}  
+
+.conteiner__buttonsmain button {
+    width: 300px;
+    margin: 1.5rem;
+}
+
+.conteiner__buttons {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.conteiner__buttons button {
+    width: 250px;
+    margin: 1.5rem;
+}
+
+.button {
+    width: 250px;
+    padding: 10px;
+    margin: 10px;
+}
+

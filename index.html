@@ -3,10 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Registro de personal</title>
 </head>
 <body>
-    
+    <main class="inicio__main" id="main__inicio">
+        <h1>REGISTRO</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Teléfono</th>
+                    <th>Base</th>
+                    <th>Función</th>
+                    <th>Presentismo</th>
+                    <th>Servicio</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody id="tablaBody">
+            <!-- Aquí se agregarán los datos dinámicamente -->
+            </tbody>
+        </table>
+
+        <div class="conteiner__buttonsmain">
+            <button class="button__main button" id="limpiarTabla">
+                Limpiar
+            </button>
+            <button class="button__main button" id="cargarButton">
+                Cargar!
+            </button>
+        </div>
+
+        <div class="conteiner__buttons">
+            <button class="button__inicio button" id="agregarempleado__button">
+                Agregar empleado
+            </button>
+            <button class="button__inicio button eliminarEmpleado">
+                Borrar empleado
+            </button>
+
+            
+            <button class="buscarempleado__button button"  id="buscarEmpleadoButton">
+                Buscar Empleado:
+            <input type="text" id="buscarEmpleadoInput" placeholder="Nombre del empleado">
+            </button>
+
+        </div>
+
+        <div id="informacionGuardada">
+            <!-- Aquí se mostrará la información -->
+        </div>
+        
+        <button class="button__borrar button"  id="borrar__info">Borrar</button>
+        <button class="button__localstorage button" id="guardarLocalStorage">Guardar en Local Storage</button>
+
+    </main>
 
 
     <script src="./js/main.js"></script>
