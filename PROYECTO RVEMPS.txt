@@ -1,3 +1,2 @@
-una app intuitiva que permita guardar un listado x de empleados con sus categorias definidas, y luego puedas interactuar con este.
-ejemplo agregar todos los dias en categorias definidas nuevas, ciertos valores. Agregar nuevos empleados, diferenciarlos, poder filtrarlos y buscarlos. Contabilizarlos. Compararlos.
-agregar valores de a mas de uno en simultaneo.
+RV ASSIST 
+La idea de la app rv assist es que sea una herramienta intuitiva que permita administrar el personal de una empresa y generar reportes de este
